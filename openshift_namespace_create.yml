@@ -1,5 +1,5 @@
 ---
-- name: Create VM on RHV
+- name: Create Namespace on Openshift
   hosts: localhost
   connection: local
   gather_facts: false
