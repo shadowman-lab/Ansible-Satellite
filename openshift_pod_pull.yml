@@ -8,7 +8,10 @@
     - redhat.openshift
     - kubernetes.core
     
-  pre_tasks:
+  tasks:
+
+  - block:
+
     - name: Login to OpenShift
       openshift_auth:
         host: "{{ openshift_fqdn }}"
@@ -16,8 +19,6 @@
         password: "{{ openshift_password }}"
         validate_certs: no
       register: openshift_auth_results
-    
-  tasks:
      
     - name: Pull Pod list
       k8s_info:
@@ -25,7 +26,7 @@
         kind: Pod
       register: pod_list
       
-  always:
+    always:
     - name: If login succeeded, try to log out (revoke access token)
       openshift_auth:
         state: absent
