@@ -30,5 +30,6 @@
     - name: If login succeeded, try to log out (revoke access token)
       openshift_auth:
         state: absent
+        host: "{{ openshift_fqdn }}"
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
       when: openshift_auth_results.openshift_auth.api_key is defined
