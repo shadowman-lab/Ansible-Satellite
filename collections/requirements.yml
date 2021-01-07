@@ -2,5 +2,4 @@ collections:
 
   - name: redhat.openshift
 
-  - name: community.kubernetes
-    source: https://towerhub.shadowman.dev/api/galaxy/content/community/
+  - name: kubernetes.core

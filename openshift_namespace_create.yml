@@ -5,52 +5,29 @@
   gather_facts: false
 
   collections:
-    - redhat.rhv
+    - redhat.openshift
+    - kubernetes.core
     
   pre_tasks:
-    - name: Login to RHV
-      ovirt_auth:
-        hostname: "{{ rhvm_fqdn }}"
-        username: "{{ rhvm_user }}"
-        password: "{{ rhvm_password }}"
-        ca_file: "{{ rhvm_cafile | default(omit) }}"
-        insecure: "{{ rhvm_insecure | default(true) }}"
-      tags:
-        - always
-  vars:
-    datacenter: Default
-    cluster: Default
-    template: "{{ operating_system }}_ShadowMan"
-    vm_memory: 4GiB
-    vm_names: "{{ vm_name.split(',') }}"
-    vm_tag: RHEL
+    - name: Login to OpenShift
+      openshift_auth:
+        host: "{{ openshift_fqdn }}"
+        username: "{{ openshift_user }}"
+        password: "{{ openshift_password }}"
+        validate_certs: no
+      register: openshift_auth_results
     
   tasks:
-    - name: Change facts if running Windows
-      set_fact:
-        vm_memory: 8GiB
-        vm_tag: Windows
-      when: operating_system == "Win2016"
      
-    - name: Create and run VM from template
-      ovirt_vm:
-        auth: "{{ ovirt_auth }}"
-        name: "{{ item }}"
-        template: "{{ template }}"
-        cluster: "{{ cluster }}"
-        memory: "{{vm_memory}}"
-        high_availability: true
-        state: "{{ vm_state }}"
-        wait: yes
-      loop: "{{ vm_names }}"
+    - name: Pull Pod list
+      k8s_info:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        kind: Pod
+      register: pod_list
       
-    - name: Apply tags using RHV tag playbook
-      include_tasks: rhv_vm_tag.yml
-      
-  post_tasks:
-    - name: Logout from RHV
-      ovirt_auth:
+  always:
+    - name: If login succeeded, try to log out (revoke access token)
+      openshift_auth:
         state: absent
-        ovirt_auth: "{{ ovirt_auth }}"
-      tags:
-        - always
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+      when: openshift_auth_results.openshift_auth.api_key is defined
