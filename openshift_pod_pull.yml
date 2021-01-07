@@ -1,7 +1,6 @@
 ---
 - name: Pull Pod list
-  hosts: localhost
-  connection: local
+  hosts: all
   gather_facts: false
 
   collections:
