@@ -12,7 +12,7 @@
 
   - block:
 
-    
+
      
     - name: Pull Pod list
       k8s_info:
@@ -20,6 +20,7 @@
         username: "{{ openshift_user }}"
         password: "{{ openshift_password }}"
         kind: Pod
+        validate_certs: no
       register: pod_list
       
     always:
