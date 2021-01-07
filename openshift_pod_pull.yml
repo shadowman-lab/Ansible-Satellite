@@ -1,5 +1,5 @@
 ---
-- name: Create Namespace on Openshift
+- name: Pull Pod list
   hosts: localhost
   connection: local
   gather_facts: false
