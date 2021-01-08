@@ -1,5 +1,5 @@
 ---
-- name: Pull Pod list
+- name: Deploy Tower Web App
   hosts: all
   gather_facts: false
 
@@ -80,13 +80,13 @@
           - app = tower-demo
       register: pod
       
-    - name: Copy HTML Folder into pods
+    - name: Copy HTML into Tower Pods
       command: "oc cp /home/openshift/html/ {{ item.metadata.name }}:/var/www/"
       loop: "{{ pod.resources }}"
       loop_control:
         label: "{{ item.metadata.name }}"
 
-    - name: Display Link for application
+    - name: Display Link for Application
       debug:
         msg: "https://{{ route.result.spec.host }}"
 

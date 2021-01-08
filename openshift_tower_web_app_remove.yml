@@ -1,5 +1,5 @@
 ---
-- name: Pull Pod list
+- name: Remove Tower Web App
   hosts: all
   gather_facts: false
 

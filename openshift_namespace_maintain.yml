@@ -1,5 +1,5 @@
 ---
-- name: Create namespace
+- name: Maintain namespaces in OpenShift
   hosts: all
   gather_facts: false
 
@@ -19,7 +19,7 @@
         validate_certs: no
       register: openshift_auth_results
      
-    - name: Create namespace
+    - name: Create or Remove namespace
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         kind: Namespace
