@@ -1,0 +1,85 @@
+---
+- name: Pull Pod list
+  hosts: all
+  gather_facts: false
+
+  collections:
+    - redhat.openshift
+    - kubernetes.core
+    
+  tasks:
+
+  - block:
+
+    - name: Login to OpenShift
+      openshift_auth:
+        host: "{{ openshift_fqdn }}"
+        username: "{{ openshift_user }}"
+        password: "{{ openshift_password }}"
+        validate_certs: no
+      register: openshift_auth_results
+
+    - name: Create hello-world deployment
+      redhat.openshift.k8s:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: hello-kubernetes
+            namespace: default
+          spec:
+            replicas: 3
+            selector:
+              matchLabels:
+                app: hello-kubernetes
+            template:
+              metadata:
+                labels:
+                  app: hello-kubernetes
+              spec:
+                containers:
+                - name: hello-kubernetes
+                  image: paulbouwer/hello-kubernetes:1.8
+                  ports:
+                  - containerPort: 8080
+
+    - name: Create Service for the hello-world deployment
+      redhat.openshift.k8s:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: hello-kubernetes
+            namespace: default
+          spec:
+            ports:
+            - port: 80
+              targetPort: 8080
+            selector:
+              app: hello-kubernetes
+
+    - name: Expose the insecure hello-world service externally
+      redhat.openshift.openshift_route:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        service: hello-kubernetes
+        namespace: default
+        insecure_policy: allow
+      register: route
+
+    - name: Display route
+      debug:
+        var: route
+      
+    always:
+    - name: If login succeeded, try to log out (revoke access token)
+      openshift_auth:
+        state: absent
+        host: "{{ openshift_fqdn }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+      when: openshift_auth_results.openshift_auth.api_key is defined
