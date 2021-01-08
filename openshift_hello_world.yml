@@ -79,12 +79,9 @@
         label_selectors:
           - app = tower-demo
       register: pod
-
-    - name: Connect to openshift
-      command: "oc login --token={{ openshift_auth_results.openshift_auth.api_key }} --server={{ openshift_fqdn }}"
       
-    - name: copy folder
-      command: "oc cp /home/network/backup.yml {{ pod.resources[0].metadata.name }}:/var/www/html"
+    - name: Copy HTML Folder into container
+      command: "oc cp /home/openshift/html/ {{ pod.resources[0].metadata.name }}:/var/www/"
 
     - name: Display Link for application
       debug:
