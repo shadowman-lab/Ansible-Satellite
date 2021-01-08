@@ -24,7 +24,7 @@
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
         service: hello-kubernetes
-        port: 443
+        port: "443"
         state: absent
         namespace: default
       register: route
