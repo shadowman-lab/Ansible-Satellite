@@ -39,12 +39,6 @@
           metadata:
             name: hello-kubernetes
             namespace: default
-          spec:
-            ports:
-            - port: 443
-              targetPort: 8080
-            selector:
-              app: hello-kubernetes
 
     - name: Remove hello-world deployment
       kubernetes.core.k8s:
@@ -57,21 +51,6 @@
           metadata:
             name: hello-kubernetes
             namespace: default
-          spec:
-            replicas: 3
-            selector:
-              matchLabels:
-                app: hello-kubernetes
-            template:
-              metadata:
-                labels:
-                  app: hello-kubernetes
-              spec:
-                containers:
-                - name: hello-kubernetes
-                  image: paulbouwer/hello-kubernetes:1.8
-                  ports:
-                  - containerPort: 8080
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
