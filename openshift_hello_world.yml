@@ -81,7 +81,8 @@
       register: pod
       
     - name: Copy HTML Folder into container
-      command: "oc cp /home/openshift/html/ {{ pod.resources[0].metadata.name }}:/var/www/"
+      command: "oc cp /home/openshift/html/ {{ item.metadata.name }}:/var/www/"
+      loop: "{{ pod.resources }}"
 
     - name: Display Link for application
       debug:
