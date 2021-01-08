@@ -70,9 +70,10 @@
         namespace: default
       register: route
 
-    - name: Display route
+    - name: Display Link for application
       debug:
-        var: route
+        var: route.result.spec.host
+      when: route.change == true
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
