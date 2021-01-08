@@ -20,7 +20,7 @@
       register: openshift_auth_results
 
     - name: Create hello-world deployment
-      redhat.openshift.k8s:
+      kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
         definition:
@@ -68,7 +68,6 @@
         validate_certs: no
         service: hello-kubernetes
         namespace: default
-        insecure_policy: allow
       register: route
 
     - name: Display route

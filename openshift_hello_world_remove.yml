@@ -71,12 +71,7 @@
         service: hello-kubernetes
         state: absent
         namespace: default
-        insecure_policy: allow
       register: route
-
-    - name: Display route
-      debug:
-        var: route
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
