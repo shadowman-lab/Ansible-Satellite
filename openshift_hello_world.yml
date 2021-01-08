@@ -40,8 +40,8 @@
                   app: hello-kubernetes
               spec:
                 containers:
-                - name: hello-kubernetes
-                  image: paulbouwer/hello-kubernetes:1.8
+                - name: web
+                  image: registry.redhat.io/rhscl/httpd-24-rhel7
                   ports:
                   - containerPort: 8080
 
