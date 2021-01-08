@@ -80,7 +80,7 @@
           - app = tower-demo
       register: pod
       
-    - name: Copy HTML Folder into container
+    - name: Copy HTML Folder into pods
       command: "oc cp /home/openshift/html/ {{ item.metadata.name }}:/var/www/"
       loop: "{{ pod.resources }}"
 
