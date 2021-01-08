@@ -46,7 +46,7 @@
                   - containerPort: 8080
 
     - name: Create Service for the hello-world deployment
-      redhat.openshift.k8s:
+      kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
         definition:
