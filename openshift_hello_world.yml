@@ -78,6 +78,13 @@
         kind: Pod
         label_selectors:
           - app = tower-demo
+      register: pod
+
+    - name: Connect to openshift
+      command: oc login --token= {{ openshift_api }} --server={{ openshift_fqdn }}
+      
+    - name: copy folder
+      command: "oc cp /website {{ pod.resources[0].metadata.name }}:/var/www/html"
 
     - name: Display Link for application
       debug:
