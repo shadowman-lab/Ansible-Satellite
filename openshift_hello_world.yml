@@ -89,6 +89,17 @@
     - name: Display Link for application
       debug:
         msg: "https://{{ route.result.spec.host }}"
+
+    - name: Set stats for the e-mail body and ServiceNow
+      set_stats:
+        data:
+          email_body: "tower-demo: https://{{ route.result.spec.host }} "
+          work_notes: "[code]<a href='https://{{ route.result.spec.host }}'>tower-demo</a>[/code] "
+
+    - name: Set stats for the e-mail subject
+      set_stats:
+        data:
+          email_subject: "Ansible OpenShift Web Link"
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
