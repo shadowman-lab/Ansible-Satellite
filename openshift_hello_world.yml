@@ -73,6 +73,12 @@
         namespace: default
       register: route
 
+    - name: Search for all Pods labelled app=tower-demo
+      kubernetes.core.k8s_info:
+        kind: Pod
+        label_selectors:
+          - app = tower-demo
+
     - name: Display Link for application
       debug:
         msg: "https://{{ route.result.spec.host }}"
