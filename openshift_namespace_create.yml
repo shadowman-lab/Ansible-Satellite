@@ -23,7 +23,7 @@
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         kind: Namespace
-        state: present
+        state: "{{ state }}"
         name: "{{ namespace }}"
         validate_certs: no
       
