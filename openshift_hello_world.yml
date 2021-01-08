@@ -84,7 +84,7 @@
       command: "oc login --token={{ openshift_auth_results.openshift_auth.api_key }} --server={{ openshift_fqdn }}"
       
     - name: copy folder
-      command: "oc cp website {{ pod.resources[0].metadata.name }}:/var/www/html"
+      command: "oc cp /home/network/backup.yml {{ pod.resources[0].metadata.name }}:/var/www/html"
 
     - name: Display Link for application
       debug:
