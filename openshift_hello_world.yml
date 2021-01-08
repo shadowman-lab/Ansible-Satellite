@@ -81,7 +81,7 @@
       register: pod
 
     - name: Connect to openshift
-      command: oc login --token= {{ openshift_auth_results.openshift_auth.api_key }} --server={{ openshift_fqdn }}
+      command: "oc login --token= {{ openshift_auth_results.openshift_auth.api_key }} --server={{ openshift_fqdn }}"
       
     - name: copy folder
       command: "oc cp /website {{ pod.resources[0].metadata.name }}:/var/www/html"
