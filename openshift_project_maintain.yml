@@ -24,7 +24,7 @@
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         state: "{{ state }}"
         definition:
-          apiVersion: v1
+          apiVersion: project.openshift.io/v1
           kind: Project
           metadata:
             name: "{{ project }}"
