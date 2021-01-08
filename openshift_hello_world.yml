@@ -57,7 +57,7 @@
             namespace: default
           spec:
             ports:
-            - port: 443
+            - port: 80
               targetPort: 8080
             selector:
               app: hello-kubernetes
@@ -67,6 +67,7 @@
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
         service: hello-kubernetes
+        port: 443
         namespace: default
       register: route
 
