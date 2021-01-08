@@ -27,17 +27,17 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: hello-kubernetes
+            name: tower-demo
             namespace: default
           spec:
             replicas: 3
             selector:
               matchLabels:
-                app: hello-kubernetes
+                app: tower-demo
             template:
               metadata:
                 labels:
-                  app: hello-kubernetes
+                  app: tower-demo
               spec:
                 containers:
                 - name: web
@@ -53,14 +53,14 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: hello-kubernetes
+            name: tower-demo
             namespace: default
           spec:
             ports:
             - port: 443
               targetPort: 8080
             selector:
-              app: hello-kubernetes
+              app: tower-demo
 
     - name: Expose the insecure hello-world service externally
       redhat.openshift.openshift_route:
@@ -69,7 +69,7 @@
         termination: edge
         tls:
           insecure_policy: allow
-        service: hello-kubernetes
+        service: tower-demo
         namespace: default
       register: route
 
