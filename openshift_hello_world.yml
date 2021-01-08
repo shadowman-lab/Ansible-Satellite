@@ -66,6 +66,9 @@
       redhat.openshift.openshift_route:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
+        termination: edge
+        tls:
+          insecure_policy: allow
         service: hello-kubernetes
         namespace: default
       register: route
