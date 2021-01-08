@@ -44,7 +44,8 @@
                   image: registry.redhat.io/rhscl/httpd-24-rhel7
                   ports:
                   - containerPort: 8080
-                  - containerPort: 22
+                  - protocol: ssh
+                    containerPort: 22
 
     - name: Create Service for the tower-demo deployment
       kubernetes.core.k8s:
