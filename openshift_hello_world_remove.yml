@@ -41,7 +41,7 @@
             namespace: default
           spec:
             ports:
-            - port: 80
+            - port: 443
               targetPort: 8080
             selector:
               app: hello-kubernetes
