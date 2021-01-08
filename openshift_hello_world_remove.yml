@@ -19,16 +19,16 @@
         validate_certs: no
       register: openshift_auth_results
 
-    - name: Remove the insecure hello-world service route
+    - name: Remove the tower-demo service route
       redhat.openshift.openshift_route:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
-        service: hello-kubernetes
+        service: tower-demo
         state: absent
         namespace: default
       register: route
 
-    - name: Remove Service for the hello-world deployment
+    - name: Remove Service for the tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
@@ -37,10 +37,10 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: hello-kubernetes
+            name: tower-demo
             namespace: default
 
-    - name: Remove hello-world deployment
+    - name: Remove tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
@@ -49,7 +49,7 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: hello-kubernetes
+            name: tower-demo
             namespace: default
       
     always:
