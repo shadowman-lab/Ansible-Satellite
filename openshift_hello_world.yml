@@ -72,7 +72,7 @@
 
     - name: Display Link for application
       debug:
-        var: route.result.spec.host
+        msg: "https://{{ route.result.spec.host }}"
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
