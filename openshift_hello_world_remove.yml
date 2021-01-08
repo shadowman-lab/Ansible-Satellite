@@ -19,6 +19,33 @@
         validate_certs: no
       register: openshift_auth_results
 
+    - name: Remove the insecure hello-world service route
+      redhat.openshift.openshift_route:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        service: hello-kubernetes
+        state: absent
+        namespace: default
+      register: route
+
+    - name: Remove Service for the hello-world deployment
+      kubernetes.core.k8s:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        state: absent
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: hello-kubernetes
+            namespace: default
+          spec:
+            ports:
+            - port: 80
+              targetPort: 8080
+            selector:
+              app: hello-kubernetes
+
     - name: Remove hello-world deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
@@ -45,33 +72,6 @@
                   image: paulbouwer/hello-kubernetes:1.8
                   ports:
                   - containerPort: 8080
-
-    - name: Remove Service for the hello-world deployment
-      kubernetes.core.k8s:
-        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
-        validate_certs: no
-        state: absent
-        definition:
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: hello-kubernetes
-            namespace: default
-          spec:
-            ports:
-            - port: 80
-              targetPort: 8080
-            selector:
-              app: hello-kubernetes
-
-    - name: Remove the insecure hello-world service route
-      redhat.openshift.openshift_route:
-        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
-        validate_certs: no
-        service: hello-kubernetes
-        state: absent
-        namespace: default
-      register: route
       
     always:
     - name: If login succeeded, try to log out (revoke access token)
