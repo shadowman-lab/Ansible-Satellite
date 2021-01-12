@@ -68,6 +68,8 @@
         validate_certs: no
         termination: edge
         tls:
+          certificate: /certs/shadowman_cert.cer
+          key: /certs/shadowman_private.key
           insecure_policy: allow
         service: tower-demo
         namespace: default
