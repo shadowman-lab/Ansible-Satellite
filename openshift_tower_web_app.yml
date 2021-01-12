@@ -40,7 +40,7 @@
                   app: tower-demo
               spec:
                 containers:
-                - name: web
+                - name: tower-demo
                   image: nginx:latest
                   ports:
                   - containerPort: 80
