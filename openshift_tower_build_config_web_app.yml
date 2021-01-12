@@ -1,0 +1,77 @@
+---
+- name: Deploy Tower Web App
+  hosts: all
+  gather_facts: false
+
+  collections:
+    - redhat.openshift
+    - kubernetes.core
+    
+  tasks:
+
+  - block:
+
+    - name: Login to OpenShift
+      openshift_auth:
+        host: "{{ openshift_fqdn }}"
+        username: "{{ openshift_user }}"
+        password: "{{ openshift_password }}"
+        validate_certs: no
+      register: openshift_auth_results
+
+    - name: Create tower-demo build config
+      kubernetes.core.k8s:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        definition:
+          kind: BuildConfig
+          apiVersion: build.openshift.io/v1
+          metadata:
+            name: tower-webapp
+            namespace: default
+            labels:
+              app: tower-webapp
+              app.kubernetes.io/component: tower-webapp
+              app.kubernetes.io/instance: tower-webapp
+              app.kubernetes.io/name: nginx
+              app.kubernetes.io/part-of: tower-webapp
+              app.openshift.io/runtime: nginx
+              app.openshift.io/runtime-version: latest
+          spec:
+            nodeSelector: null
+            output:
+              to:
+                kind: ImageStreamTag
+                name: 'tower-webapp:latest'
+            resources: {}
+            successfulBuildsHistoryLimit: 5
+            failedBuildsHistoryLimit: 5
+            strategy:
+              type: Source
+              sourceStrategy:
+                from:
+                  kind: ImageStreamTag
+                  namespace: openshift
+                  name: 'nginx:latest'
+            postCommit: {}
+            source:
+              type: Git
+              git:
+                uri: 'https://github.com/shadowman-lab/Ansible-OpenShift.git'
+              contextDir: /html
+            triggers:
+              - type: ImageChange
+                imageChange:
+                  lastTriggeredImageID: >-
+                    image-registry.openshift-image-registry.svc:5000/openshift/nginx@sha256:77bb7779506f73ef84f2e22216c45266699c1b7301bc7ec45da0bbfb5cc0a376
+              - type: ConfigChange
+            runPolicy: Serial
+          
+    always:
+    - name: If login succeeded, try to log out (revoke access token)
+      openshift_auth:
+        state: absent
+        host: "{{ openshift_fqdn }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+      when: openshift_auth_results.openshift_auth.api_key is defined
