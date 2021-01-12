@@ -82,7 +82,7 @@
       register: pod
       
     - name: Copy HTML into Tower Pods
-      command: "oc cp /home/openshift/html/ {{ item.metadata.name }}:/var/www/"
+      command: "oc cp /home/openshift/html/ {{ item.metadata.name }}:/usr/share/nginx/html"
       loop: "{{ pod.resources }}"
       loop_control:
         label: "{{ item.metadata.name }}"
