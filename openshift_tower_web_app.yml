@@ -41,7 +41,7 @@
               spec:
                 containers:
                 - name: tower-demo
-                  image: nginx:latest
+                  image: tower-webapp:latest
                   ports:
                   - containerPort: 80
 
