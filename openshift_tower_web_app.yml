@@ -43,7 +43,7 @@
                 - name: tower-demo
                   image: image-registry.openshift-image-registry.svc:5000/default/tower-webapp
                   ports:
-                  - containerPort: 80
+                  - containerPort: 8080
 
     - name: Create Service for the tower-demo deployment
       kubernetes.core.k8s:
@@ -58,7 +58,7 @@
           spec:
             ports:
             - port: 443
-              targetPort: 80
+              targetPort: 8080
             selector:
               app: tower-demo
 
