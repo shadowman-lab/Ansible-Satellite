@@ -41,7 +41,7 @@
               spec:
                 containers:
                 - name: web
-                  image: registry.redhat.io/rhscl/httpd-24-rhel7
+                  image: nginx:latest
                   livenessProbe:
                     tcpSocket:
                       port: 8080
