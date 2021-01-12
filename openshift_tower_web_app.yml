@@ -41,7 +41,7 @@
               spec:
                 containers:
                 - name: tower-demo
-                  image: tower-webapp:latest
+                  image: image-registry.openshift-image-registry.svc:5000/default/tower-webapp
                   ports:
                   - containerPort: 80
 
