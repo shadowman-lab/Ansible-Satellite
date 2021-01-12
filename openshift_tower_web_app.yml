@@ -43,7 +43,7 @@
                 - name: web
                   image: nginx:latest
                   ports:
-                  - containerPort: 8080
+                  - containerPort: 80
 
     - name: Create Service for the tower-demo deployment
       kubernetes.core.k8s:
@@ -58,7 +58,7 @@
           spec:
             ports:
             - port: 443
-              targetPort: 8080
+              targetPort: 80
             selector:
               app: tower-demo
 
