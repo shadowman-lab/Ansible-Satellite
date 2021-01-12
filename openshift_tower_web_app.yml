@@ -42,13 +42,6 @@
                 containers:
                 - name: web
                   image: nginx:latest
-                  livenessProbe:
-                    tcpSocket:
-                      port: 8080
-                    timeoutSeconds: 1
-                    periodSeconds: 10
-                    successThreshold: 1
-                    failureThreshold: 3
                   ports:
                   - containerPort: 8080
 
