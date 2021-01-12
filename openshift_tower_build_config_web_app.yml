@@ -19,7 +19,18 @@
         validate_certs: no
       register: openshift_auth_results
 
-    - name: Create tower-demo build config
+    - name: Create tower-webapp Image Stream
+      kubernetes.core.k8s:
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: no
+        definition:
+          apiVersion: image.openshift.io/v1
+          kind: ImageStream
+          metadata:
+            name: tower-webapp
+            namespace: default
+
+    - name: Create tower-webapp build config
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: no
