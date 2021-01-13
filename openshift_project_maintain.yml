@@ -1,6 +1,6 @@
 ---
 - name: Maintain Projects in OpenShift
-  hosts: all
+  hosts: localhost
   gather_facts: false
 
   collections:

@@ -1,6 +1,6 @@
 ---
 - name: Remove Tower Web App
-  hosts: all
+  hosts: localhost
   gather_facts: false
 
   collections:
