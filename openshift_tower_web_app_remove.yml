@@ -22,6 +22,7 @@
     - name: Remove the tower-demo service route
       redhat.openshift.openshift_route:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         service: tower-demo
         state: absent
@@ -31,6 +32,7 @@
     - name: Remove Service for the tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         state: absent
         definition:
@@ -43,6 +45,7 @@
     - name: Remove tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         state: absent
         definition:

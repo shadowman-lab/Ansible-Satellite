@@ -22,6 +22,7 @@
     - name: Create tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         definition:
           apiVersion: apps/v1
@@ -48,6 +49,7 @@
     - name: Create Service for the tower-demo deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         definition:
           apiVersion: v1
@@ -65,6 +67,7 @@
     - name: Expose the tower-demo service externally
       redhat.openshift.openshift_route:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         validate_certs: no
         termination: edge
         tls:

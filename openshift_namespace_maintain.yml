@@ -22,6 +22,7 @@
     - name: Create or Remove namespace
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        host: "{{ openshift_fqdn }}"
         kind: Namespace
         state: "{{ state }}"
         name: "{{ namespace }}"
