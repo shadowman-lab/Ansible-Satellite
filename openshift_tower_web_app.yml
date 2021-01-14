@@ -1,5 +1,5 @@
 ---
-- name: Deploy Tower Web App
+- name: Deploy {{ app_name }} Web App
   hosts: localhost
   gather_facts: false
 
