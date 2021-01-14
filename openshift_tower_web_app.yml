@@ -19,7 +19,7 @@
         validate_certs: no
       register: openshift_auth_results
 
-    - name: Create tower-demo deployment
+    - name: Create {{ app_name }} deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
@@ -28,25 +28,25 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: tower-demo
+            name: "{{ app_name }}"
             namespace: default
           spec:
             replicas: 3
             selector:
               matchLabels:
-                app: tower-demo
+                app: "{{ app_name }}"
             template:
               metadata:
                 labels:
-                  app: tower-demo
+                  app: "{{ app_name }}"
               spec:
                 containers:
-                - name: tower-demo
-                  image: image-registry.openshift-image-registry.svc:5000/default/tower-webapp
+                - name: "{{ app_name }}"
+                  image: image-registry.openshift-image-registry.svc:5000/default/{{ app_name }}
                   ports:
                   - containerPort: 8080
 
-    - name: Create Service for the tower-demo deployment
+    - name: Create Service for the {{ app_name }} deployment
       kubernetes.core.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
@@ -55,16 +55,16 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: tower-demo
+            name: "{{ app_name }}"
             namespace: default
           spec:
             ports:
             - port: 443
               targetPort: 8080
             selector:
-              app: tower-demo
+              app: "{{ app_name }}"
 
-    - name: Expose the tower-demo service externally
+    - name: Expose the {{ app_name }} service externally
       redhat.openshift.openshift_route:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
@@ -72,7 +72,7 @@
         termination: edge
         tls:
           insecure_policy: allow
-        service: tower-demo
+        service: "{{ app_name }}"
         namespace: default
       register: route
 
