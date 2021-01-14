@@ -83,8 +83,8 @@
     - name: Set stats for the e-mail body and ServiceNow
       set_stats:
         data:
-          email_body: "tower-demo: https://{{ route.result.spec.host }} "
-          work_notes: "[code]<a href='https://{{ route.result.spec.host }}'>tower-demo</a>[/code] "
+          email_body: "{{ app_name }}: https://{{ route.result.spec.host }} "
+          work_notes: "[code]<a href='https://{{ route.result.spec.host }}'>{{ app_name }}</a>[/code] "
 
     - name: Set stats for the e-mail subject
       set_stats:
