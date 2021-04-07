@@ -29,7 +29,7 @@
         namespace: default
 
     - name: Remove Service for the {{ app_name }} deployment
-      kubernetes.core.k8s:
+      redhat.openshift.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
         validate_certs: no
@@ -42,7 +42,7 @@
             namespace: default
 
     - name: Remove {{ app_name }} deployment
-      kubernetes.core.k8s:
+      redhat.openshift.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
         validate_certs: no

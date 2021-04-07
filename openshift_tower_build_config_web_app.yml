@@ -20,7 +20,7 @@
       register: openshift_auth_results
 
     - name: Create {{ app_name }} Image Stream
-      kubernetes.core.k8s:
+      redhat.openshift.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
         validate_certs: no
@@ -32,7 +32,7 @@
             namespace: default
 
     - name: Create {{ app_name }} build config
-      kubernetes.core.k8s:
+      redhat.openshift.k8s:
         api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         host: "{{ openshift_fqdn }}"
         validate_certs: no
