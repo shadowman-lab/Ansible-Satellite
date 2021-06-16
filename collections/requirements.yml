@@ -3,3 +3,4 @@ collections:
   - name: redhat.openshift
 
   - name: kubernetes.core
+    version: 1.2.0
