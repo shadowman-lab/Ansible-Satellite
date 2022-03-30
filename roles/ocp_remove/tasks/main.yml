@@ -6,14 +6,14 @@
       host: "{{ openshift_fqdn }}"
       username: "{{ openshift_user }}"
       password: "{{ openshift_password }}"
-      validate_certs: no
+      validate_certs: false
     register: openshift_auth_results
 
   - name: Remove the {{ app_name }} service route
     redhat.openshift.openshift_route:
       api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
       host: "{{ openshift_fqdn }}"
-      validate_certs: no
+      validate_certs: false
       service: "{{ app_name }}"
       state: absent
       namespace: default
@@ -22,7 +22,7 @@
     redhat.openshift.k8s:
       api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
       host: "{{ openshift_fqdn }}"
-      validate_certs: no
+      validate_certs: false
       state: absent
       definition:
         apiVersion: v1
@@ -35,7 +35,7 @@
     redhat.openshift.k8s:
       api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
       host: "{{ openshift_fqdn }}"
-      validate_certs: no
+      validate_certs: false
       state: absent
       definition:
         apiVersion: apps/v1
@@ -45,10 +45,10 @@
           namespace: default
     
   always:
-  - name: If login succeeded, try to log out (revoke access token)
-    redhat.openshift.openshift_auth:
-      state: absent
-      host: "{{ openshift_fqdn }}"
-      api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
-      validate_certs: no
-    when: openshift_auth_results.openshift_auth.api_key is defined
+    - name: If login succeeded, try to log out (revoke access token)
+      redhat.openshift.openshift_auth:
+        state: absent
+        host: "{{ openshift_fqdn }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: false
+      when: openshift_auth_results.openshift_auth.api_key is defined

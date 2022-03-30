@@ -5,7 +5,7 @@
       host: "{{ openshift_fqdn }}"
       username: "{{ openshift_user }}"
       password: "{{ openshift_password }}"
-      validate_certs: no
+      validate_certs: false
     register: openshift_auth_results
     
   - name: Create or Remove namespace
@@ -15,13 +15,13 @@
       kind: Namespace
       state: "{{ state }}"
       name: "{{ namespace }}"
-      validate_certs: no
+      validate_certs: false
     
   always:
-  - name: If login succeeded, try to log out (revoke access token)
-    redhat.openshift.openshift_auth:
-      state: absent
-      host: "{{ openshift_fqdn }}"
-      api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
-      validate_certs: no
-    when: openshift_auth_results.openshift_auth.api_key is defined
+    - name: If login succeeded, try to log out (revoke access token)
+      redhat.openshift.openshift_auth:
+        state: absent
+        host: "{{ openshift_fqdn }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        validate_certs: false
+      when: openshift_auth_results.openshift_auth.api_key is defined
