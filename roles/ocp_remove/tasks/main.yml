@@ -43,7 +43,7 @@
         metadata:
           name: "{{ app_name }}"
           namespace: default
-    
+
   always:
     - name: If login succeeded, try to log out (revoke access token)
       redhat.openshift.openshift_auth:

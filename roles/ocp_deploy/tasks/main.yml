@@ -31,10 +31,10 @@
                 app: "{{ app_name }}"
             spec:
               containers:
-              - name: "{{ app_name }}"
-                image: image-registry.openshift-image-registry.svc:5000/default/{{ app_name }}
-                ports:
-                - containerPort: 8080
+                - name: "{{ app_name }}"
+                  image: image-registry.openshift-image-registry.svc:5000/default/{{ app_name }}
+                  ports:
+                    - containerPort: 8080
 
   - name: Create Service for the {{ app_name }} deployment
     redhat.openshift.k8s:
@@ -49,8 +49,8 @@
           namespace: default
         spec:
           ports:
-          - port: 443
-            targetPort: 8080
+            - port: 443
+              targetPort: 8080
           selector:
             app: "{{ app_name }}"
 
@@ -80,7 +80,7 @@
     ansible.builtin.set_stats:
       data:
         email_subject: "Ansible OpenShift Web Link"
-    
+
   always:
     - name: If login succeeded, try to log out (revoke access token)
       redhat.openshift.openshift_auth:

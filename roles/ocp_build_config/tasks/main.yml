@@ -69,7 +69,7 @@
                   image-registry.openshift-image-registry.svc:5000/openshift/nginx@sha256:77bb7779506f73ef84f2e22216c45266699c1b7301bc7ec45da0bbfb5cc0a376
             - type: ConfigChange
           runPolicy: Serial
-        
+
   always:
     - name: If login succeeded, try to log out (revoke access token)
       redhat.openshift.openshift_auth:
