@@ -51,7 +51,7 @@ content_views:
       product: "Shadowman Demo"
     - name: "rhel"
       product: "Shadowman Registry"
-    #filters:
+    filters:
     #- name: "AllPackagesNoErrata"
     #  type: "rpm"
     #  inclusion: "true"
@@ -59,19 +59,19 @@ content_views:
     #  original_packages: true
     #  repositories: "[]"
     # No Streams in RHEL7
-    #- name: "ErrataByDate"
-    #  type: "erratum"
-    #  inclusion: "true"
-    #  description: "Include all errata updated as of {{ filter_enddate }}"
-    #  repositories: "[]"
-    #  rules:
-    #  - name: "errata-by-date-{{ filter_enddate }}"
-    #    end_date: "{{ filter_enddate }}"
-    #    date_type: "updated"
-    #    types:
-    #    - "enhancement"
-    #    - "bugfix"
-    #    - "security"
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
     date_filter_name: "ErrataByDate"
     environments:
     - "Development"
@@ -90,7 +90,6 @@ content_views:
       product: "Shadowman Registry"
     - name: "Shadowman Containers"
       product: "Shadowman Registry"
-    date_filter_name: "ErrataByDate"
     environments:
     - "Library"
     - "Shadowman Development"
@@ -119,6 +118,20 @@ content_views:
       product: "Red Hat Virtualization"
     - name: "Red Hat Virtualization Manager 4.4 for RHEL 8 x86_64 RPMs"
       product: "Red Hat Virtualization Manager"
+    filters:
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
     date_filter_name: "ErrataByDate"
     environments:
     - "Library"

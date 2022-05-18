@@ -21,7 +21,7 @@
       description: "{{ description }}"
       filter_type: "erratum" # required for date filter
       date_type: "updated" # default
-      end_date: "{{ filter_enddate }}"
+      end_date: "{{ filter_enddate | default(omit) }}"
       inclusion: True
     loop: "{{ content_views }}"
 
