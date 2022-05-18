@@ -1,8 +1,7 @@
----
 - name: Publish the configured Content Views and Composite Content Views
   hosts: localhost
   
   tasks:
-
-    debug:
-      var: ansible_date_time.date
+    - name: debug vars
+      debug:
+        var: ansible_date_time.date
