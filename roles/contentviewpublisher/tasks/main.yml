@@ -14,7 +14,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       server_url: "{{ server_url }}"
-      name: "{{ item.date_filter_name}}"
+      name: "{{ item.date_filter_name | default(omit) }}"
       organization: "{{ sat_organization }}"
       validate_certs: "{{ sat_validate_certs }}"
       content_view: "{{ item.name }}"
