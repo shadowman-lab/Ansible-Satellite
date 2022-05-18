@@ -15,16 +15,16 @@
       lifecycle_environments: "{{ target_lce }}"
     loop: "{{ content_views }}"
 
-  - name: Promote the configured composite content views
-    redhat.satellite.content_view_version:
-      username: "{{ username }}"
-      password: "{{ password }}"
-      server_url: "{{ server_url }}"
-      organization: "{{ sat_organization }}"
-      validate_certs: "{{ sat_validate_certs }}"
-      content_view: "{{ item.name }}"
-      description: "{{ description }}"
-      current_lifecycle_environment: "{{ current_lce }}"
-      lifecycle_environments: "{{ target_lce }}"
-    loop: "{{ composite_content_views }}"
+#  - name: Promote the configured composite content views
+#    redhat.satellite.content_view_version:
+#      username: "{{ username }}"
+#      password: "{{ password }}"
+#      server_url: "{{ server_url }}"
+#      organization: "{{ sat_organization }}"
+#      validate_certs: "{{ sat_validate_certs }}"
+#      content_view: "{{ item.name }}"
+#      description: "{{ description }}"
+#      current_lifecycle_environment: "{{ current_lce }}"
+#      lifecycle_environments: "{{ target_lce }}"
+#    loop: "{{ composite_content_views }}"
   when: force_publish == true

@@ -4,4 +4,4 @@
   
   roles:
     - contentviewcreator
-    - compositecontentviewcreator
+#    - compositecontentviewcreator

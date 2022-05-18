@@ -36,14 +36,14 @@
       description: "{{ description }}"
     loop: "{{ content_views }}"
 
-  - name: Publish the new composite content views version
-    redhat.satellite.content_view_version:
-      username: "{{ sat_publisher_username }}"
-      password: "{{ sat_publisher_password }}"
-      server_url: "{{ sat_server_url }}"
-      content_view: "{{ item.name }}"
-      organization: "{{ sat_organization }}"
-      validate_certs: "{{ sat_validate_certs }}"
-      description: "{{ description }}"
-    loop: "{{ composite_content_views }}"
+#  - name: Publish the new composite content views version
+#    redhat.satellite.content_view_version:
+#      username: "{{ sat_publisher_username }}"
+#      password: "{{ sat_publisher_password }}"
+#      server_url: "{{ sat_server_url }}"
+#      content_view: "{{ item.name }}"
+#      organization: "{{ sat_organization }}"
+#      validate_certs: "{{ sat_validate_certs }}"
+#      description: "{{ description }}"
+#    loop: "{{ composite_content_views }}"
   when: force_publish == true
