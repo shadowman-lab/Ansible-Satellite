@@ -1,2 +1,2 @@
-# Ansible-OpenShift
-Demos for Ansible modifications of OpenShift
+# Ansible-Satellite
+Demos for Ansible modifications of Satellite
