@@ -11,9 +11,9 @@
   block:
   - name: Update the Errata-by-date filter for content views
     redhat.satellite.content_view_filter:
-      username: "{{ sat_publisher_username }}"
-      password: "{{ sat_publisher_password }}"
-      server_url: "{{ sat_server_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      server_url: "{{ server_url }}"
       name: "{{ item.date_filter_name}}"
       organization: "{{ sat_organization }}"
       validate_certs: "{{ sat_validate_certs }}"
@@ -27,9 +27,9 @@
 
   - name: Publish the new content view version
     redhat.satellite.content_view_version:
-      username: "{{ sat_publisher_username }}"
-      password: "{{ sat_publisher_password }}"
-      server_url: "{{ sat_server_url }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      server_url: "{{ server_url }}"
       content_view: "{{ item.name }}"
       organization: "{{ sat_organization }}"
       validate_certs: "{{ sat_validate_certs }}"

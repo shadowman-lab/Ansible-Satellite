@@ -1,9 +1,9 @@
 ---
 - name: "Create the composite content view"
   redhat.satellite.content_view:
-    username: "{{ sat_publisher_username }}"
-    password: "{{ sat_publisher_password }}"
-    server_url: "{{ sat_server_url }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    server_url: "{{ server_url }}"
     organization: "{{ sat_organization }}"
     validate_certs: "{{ sat_validate_certs }}"
     name: "{{ cv.name }}"

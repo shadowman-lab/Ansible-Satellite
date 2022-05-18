@@ -4,9 +4,9 @@
 
 - name: "Create the content view filter {{ cvf.name }}"
   redhat.satellite.content_view_filter:
-    username: "{{ sat_publisher_username }}"
-    password: "{{ sat_publisher_password }}"
-    server_url: "{{ sat_server_url }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    server_url: "{{ server_url }}"
     organization: "{{ sat_organization }}"
     validate_certs: "{{ sat_validate_certs }}"
     name: "{{ cvf.name }}"
