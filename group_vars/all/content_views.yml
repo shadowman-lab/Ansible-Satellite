@@ -91,13 +91,6 @@ content_views:
     - name: "Shadowman Containers"
       product: "Shadowman Registry"
     filters:
-    #- name: "AllPackagesNoErrata"
-    #  type: "rpm"
-    #  inclusion: "true"
-    #  description: "Include all packages with no errata for all repositories"
-    #  original_packages: true
-    #  repositories: "[]"
-    # No Streams in RHEL7
     - name: "ErrataByDate"
       type: "erratum"
       inclusion: "true"
