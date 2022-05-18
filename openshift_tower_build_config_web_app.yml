@@ -1,7 +1,0 @@
----
-- name: Create {{ app_name }} Web App
-  hosts: localhost
-  gather_facts: false
-
-  roles:
-    - ocp_build_config
