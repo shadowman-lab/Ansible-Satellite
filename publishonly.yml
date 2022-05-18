@@ -1,0 +1,7 @@
+---
+- name: Publish the configured Content Views and Composite Content Views
+  hosts: localhost
+  gather_facts: false
+  
+  roles:
+    - contentviewpublisher

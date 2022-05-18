@@ -1,0 +1,8 @@
+---
+- name: Create the configured Content Views and Composite Content Views
+  hosts: localhost
+  gather_facts: false
+  
+  roles:
+    - contentviewcreator
+    - compositecontentviewcreator

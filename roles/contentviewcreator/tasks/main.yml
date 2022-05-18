@@ -1,0 +1,12 @@
+---
+# This task uses a block to create the content views from a definition suppied in all.yml
+# This version of the ccvcreator assumes all filtering is done at the CV level 
+# and that composites are unfiltered at this time
+# TODO: move filter creation to a utility folder and allow filter creation to take place here as well.
+
+- name: "Process the list of content views"
+  include_tasks: create_cv.yml
+  loop: "{{ content_views }}"
+  loop_control:
+    loop_var: cv
+  when: content_views is defined

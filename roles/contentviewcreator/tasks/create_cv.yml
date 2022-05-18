@@ -1,0 +1,23 @@
+--- 
+# This task creates the defined content view from the structure in all.yml
+# Then iterates over the list of filters when defined
+  
+  - name: "Create the content view - {{ cv.name }}"
+    redhat.satellite.content_view:
+      username: "{{ sat_publisher_username }}"
+      password: "{{ sat_publisher_password }}"
+      server_url: "{{ sat_server_url }}"
+      organization: "{{ sat_organization }}"
+      validate_certs: "{{ sat_validate_certs }}"
+      name: "{{ cv.name }}"
+      description: "{{ cv.desc }}"
+      repositories: "{{ cv.repositories }}"
+
+
+  # Add the filters
+  - name: "Add the filters to the Content View"
+    include_tasks: create_cv_filter.yml
+    loop: "{{ cv.filters }}"
+    loop_control:
+      loop_var: cvf
+    when: cv.filters is defined

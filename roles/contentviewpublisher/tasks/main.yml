@@ -1,0 +1,49 @@
+---
+# This role expects a list of content views as input. See sample variables in vars/all.yml
+# Currently the content_view_version is blocking - parallelizing this requires using async tasks and polling
+# Mileage will vary depending on the size of your content views. This is left as an exercise for the reader...
+# See: https://docs.ansible.com/ansible/latest/user_guide/playbooks_async.html
+# All Content Views should be published before any Composite Content views - the blocking nature of the call ensures this today.
+
+# TODO: implement skip if date is the same and force to publish regardless
+
+- name: Update the content views when required
+  block:
+  - name: Update the Errata-by-date filter for content views
+    redhat.satellite.content_view_filter:
+      username: "{{ sat_publisher_username }}"
+      password: "{{ sat_publisher_password }}"
+      server_url: "{{ sat_server_url }}"
+      name: "{{ item.date_filter_name}}"
+      organization: "{{ sat_organization }}"
+      validate_certs: "{{ sat_validate_certs }}"
+      content_view: "{{ item.name }}"
+      description: "{{ description }}"
+      filter_type: "erratum" # required for date filter
+      date_type: "updated" # default
+      end_date: "{{ filter_enddate }}"
+      inclusion: True
+    loop: "{{ content_views }}"
+
+  - name: Publish the new content view version
+    redhat.satellite.content_view_version:
+      username: "{{ sat_publisher_username }}"
+      password: "{{ sat_publisher_password }}"
+      server_url: "{{ sat_server_url }}"
+      content_view: "{{ item.name }}"
+      organization: "{{ sat_organization }}"
+      validate_certs: "{{ sat_validate_certs }}"
+      description: "{{ description }}"
+    loop: "{{ content_views }}"
+
+  - name: Publish the new composite content views version
+    redhat.satellite.content_view_version:
+      username: "{{ sat_publisher_username }}"
+      password: "{{ sat_publisher_password }}"
+      server_url: "{{ sat_server_url }}"
+      content_view: "{{ item.name }}"
+      organization: "{{ sat_organization }}"
+      validate_certs: "{{ sat_validate_certs }}"
+      description: "{{ description }}"
+    loop: "{{ composite_content_views }}"
+  when: force_publish == true

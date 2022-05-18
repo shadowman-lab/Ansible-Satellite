@@ -1,0 +1,28 @@
+---
+# This play creates the Content View Filters for a Content View
+# This will call create filter rules. This allows for the full access to content filter rule behaviour.
+
+- name: "Create the content view filter {{ cvf.name }}"
+  redhat.satellite.content_view_filter:
+    username: "{{ sat_publisher_username }}"
+    password: "{{ sat_publisher_password }}"
+    server_url: "{{ sat_server_url }}"
+    organization: "{{ sat_organization }}"
+    validate_certs: "{{ sat_validate_certs }}"
+    name: "{{ cvf.name }}"
+    description: "{{ cvf.description }}"
+    content_view: "{{ cv.name }}"
+    filter_type: "{{ cvf.type }}"
+    inclusion: "{{ cvf.inclusion }}"
+    repositories: "{{ cvf.repositories }}"
+
+# There is a problem here. The collection execution is delegated to the localhost
+# creating the content view filter rules uses hammer
+# the local host needs hammer and a connection configure or this needs to be sent to the satellite
+# this means the execution environment needs to have hammer
+- name: "Configure Content View Filter Rules"
+  include_tasks: create_cvf_rules.yml
+  loop: "{{ cvf.rules }}"
+  loop_control:
+    loop_var: cvfr
+  when: "cvf.rules is defined"

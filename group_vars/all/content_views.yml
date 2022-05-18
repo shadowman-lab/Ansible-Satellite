@@ -1,0 +1,299 @@
+---
+# content_views.yml
+# these are our default SOE Content View definitions for our standard base Satellite build
+description: "Published by ansible-tower on {{ ansible_date_time.date }}"
+filter_enddate: "{{ ansible_date_time.date }}"
+num_cvs_to_keep: 3
+force_publish: true
+content_views:
+  - name: "RHEL7_SOE"
+    desc: "Red Hat Enterprise Linux 7 Standard Operating Environment Content"
+    org: "{{ sat_organization }}"
+    repositories:
+    - name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Ansible Engine 2.9 RPMs for Red Hat Enterprise Linux 7 Server x86_64"
+      product: "Red Hat Ansible Engine"
+    - name: "Red Hat Satellite Tools 6.10 for RHEL 7 Server RPMs x86_64"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - RH Common RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Supplementary RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    # No Streams in RHEL7
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
+    - name: "NoFireFox"
+      type: "rpm"
+      inclusion: "false"
+      description: "Do not provide Firefox to servers"
+      original_packages: true
+      repositories: "[]"
+      rules:
+      - name: "firefox*"
+        basearch: "x86_64"
+    date_filter_name: "ErrataByDate"
+    environments:
+    - "SOE_Development"
+    - "SOE_Qualification"
+    - "SOE_Production"
+    - "App_Development"
+    - "App_Qualification"
+    - "App_Production"
+
+  - name: "RHEL8_SOE"
+    desc: "Red Hat Enterprise Linux 8 Standard Operating Environment Content"
+    org: "{{ sat_organization }}"
+    repositories:
+    - name: "Red Hat Ansible Engine 2.9 RPMs for RHEL 8 Server x86_64"
+      product: "Red Hat Ansible Engine"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - Supplementary RPMs 8"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - AppStream Kickstart 8.5"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - BaseOS Kickstart 8.5"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs"
+      product: "Red Hat Enterprise Linux Server"
+    filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "AllStreamsNoErrata"
+      type: "modulemd"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
+    - name: "NoFireFox"
+      type: "rpm"
+      inclusion: "false"
+      description: "Do not provide Firefox to servers"
+      original_packages: true
+      repositories: "[]"
+      rules:
+      - name: "firefox*"
+        basearch: "x86_64"
+    date_filter_name: "ErrataByDate"
+    environments:
+    - "SOE_Development"
+    - "SOE_Qualification"
+    - "SOE_Production"
+    - "App_Development"
+    - "App_Qualification"
+    - "App_Production"
+  
+  - name: "UpgradeFromRHEL79"
+    desc: "Red Hat Enterprise Linux 7 Standard Operating Environment Content"
+    org: "{{ sat_organization }}"
+    repositories:
+    - name: "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.9"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Ansible Engine 2.9 RPMs for Red Hat Enterprise Linux 7 Server x86_64"
+      product: "Red Hat Ansible Engine"
+    - name: "Red Hat Satellite Tools 6.10 for RHEL 7 Server RPMs x86_64"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - RH Common RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    - name: "Red Hat Enterprise Linux 7 Server - Supplementary RPMs x86_64 7Server"
+      product: "Red Hat Enterprise Linux Server"
+    filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    # No Streams in RHEL 7
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
+    - name: "NoFireFox"
+      type: "rpm"
+      inclusion: "false"
+      description: "Do not provide Firefox to servers"
+      original_packages: true
+      repositories: "[]"
+      rules:
+      - name: "firefox*"
+        basearch: "x86_64"
+    date_filter_name: "ErrataByDate"
+    environments:
+    - "SOE_Development"
+    
+  - name: "UpgradeToRHEL84"
+    desc: "Red Hat Enterprise Linux 8 Standard Operating Environment Content"
+    org: "{{ sat_organization }}"
+    repositories:
+    - name: "Red Hat Ansible Engine 2.9 RPMs for RHEL 8 Server x86_64"
+      product: "Red Hat Ansible Engine"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8.4"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8.4"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Enterprise Linux 8 for x86_64 - Supplementary RPMs 8.4"
+      product: "Red Hat Enterprise Linux for x86_64"
+    - name: "Red Hat Satellite Tools 6.10 for RHEL 8 x86_64 RPMs"
+      product: "Red Hat Enterprise Linux Server"
+    filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "AllStreamsNoErrata"
+      type: "module"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
+    - name: "NoFireFox"
+      type: "rpm"
+      inclusion: "false"
+      description: "Do not provide Firefox to servers"
+      original_packages: true
+      repositories: "[]"
+      rules:
+      - name: "firefox*"
+        basearch: "x86_64"
+    date_filter_name: "ErrataByDate"
+    environments:
+    - "SOE_Development"
+    
+  - name: "JBossEAP74"
+    desc: "Red Hat JBoss EAP 7.4 Content"
+    org: "{{ sat_organization }}"
+    repositories:
+    - name: "JBoss Enterprise Application Platform 7.4 RHEL 8 RPMs"
+      product: "JBoss Enterprise Application Platform"
+    filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "AllStreamsNoErrata"
+      type: "module"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "ErrataByDate"
+      type: "erratum"
+      inclusion: "true"
+      description: "Include all errata updated as of {{ filter_enddate }}"
+      repositories: "[]"
+      rules:
+      - name: "errata-by-date-{{ filter_enddate }}"
+        end_date: "{{ filter_enddate }}"
+        date_type: "updated"
+        types:
+        - "enhancement"
+        - "bugfix"
+        - "security"
+    date_filter_name: "ErrataByDate"
+    environments:
+    - "SOE_Development"
+    - "SOE_Qualification"
+    - "SOE_Production"
+    - "App_Development"
+    
+composite_content_views:
+  - name: "RHEL79to84Upgrade"
+    desc: "RHEL 7.9 to 8.4 Upgrade Content"
+    org: "{{ sat_organization }}"
+    components:
+    - "UpgradeFromRHEL79"
+    - "UpgradeToRHEL84"
+    environments:
+    - "SOE_Development"
+    - "SOE_Qualification"
+    - "SOE_Production"
+    - "App_Development"
+  
+  - name: "JBoss_SOE"
+    desc: "JBoss EAP7 on RHEL8 Demonstration Content"
+    org: "{{ sat_organization }}"
+    components:
+    - "RHEL8_SOE"
+    - "JBossEAP74"
+    environments:
+    - "SOE_Development"
+    - "SOE_Qualification"
+    - "SOE_Production"
+    - "App_Development"
