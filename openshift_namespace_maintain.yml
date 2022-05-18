@@ -1,7 +1,0 @@
----
-- name: Maintain namespaces in OpenShift
-  hosts: localhost
-  gather_facts: false
-
-  roles:
-    - ocp_namespace
