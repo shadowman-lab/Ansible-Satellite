@@ -9,21 +9,6 @@
 
 - name: Update the content views when required
   block:
-  - name: Update the Errata-by-date filter for content views
-    redhat.satellite.content_view_filter:
-      username: "{{ username }}"
-      password: "{{ password }}"
-      server_url: "{{ server_url }}"
-      name: "{{ item.date_filter_name | default(omit) }}"
-      organization: "{{ sat_organization }}"
-      validate_certs: "{{ sat_validate_certs }}"
-      content_view: "{{ item.name }}"
-      description: "{{ description }}"
-      filter_type: "erratum" # required for date filter
-      date_type: "updated" # default
-      end_date: "{{ filter_enddate | default(omit) }}"
-      inclusion: True
-    loop: "{{ content_views }}"
 
   - name: Publish the new content view version
     redhat.satellite.content_view_version:

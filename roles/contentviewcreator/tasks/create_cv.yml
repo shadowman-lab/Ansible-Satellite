@@ -12,12 +12,3 @@
       name: "{{ cv.name }}"
       description: "{{ cv.desc }}"
       repositories: "{{ cv.repositories }}"
-
-
-  # Add the filters
-  - name: "Add the filters to the Content View"
-    include_tasks: create_cv_filter.yml
-    loop: "{{ cv.filters }}"
-    loop_control:
-      loop_var: cvf
-    when: cv.filters is defined

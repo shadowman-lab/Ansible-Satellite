@@ -1,7 +1,6 @@
 ---
 # content_views.yml
 description: "Published by ansible-tower on {{ ansible_date_time.date }}"
-filter_enddate: "{{ ansible_date_time.date }}"
 num_cvs_to_keep: 3
 force_publish: true
 content_views:
@@ -51,33 +50,6 @@ content_views:
       product: "Shadowman Demo"
     - name: "rhel"
       product: "Shadowman Registry"
-    filters:
-    - name: "AllPackagesNoErrata"
-      type: "rpm"
-      inclusion: "true"
-      description: "Include all packages with no errata for all repositories"
-      original_packages: true
-      repositories: "[]"
-    - name: "AllStreamsNoErrata"
-      type: "module"
-      inclusion: "true"
-      description: "Include all streams with no errata for all repositories"
-      original_packages: true
-      repositories: "[]"
-    - name: "ErrataByDate"
-      type: "erratum"
-      inclusion: "true"
-      description: "Include all errata updated as of {{ filter_enddate }}"
-      repositories: "[]"
-      rules:
-      - name: "errata-by-date-{{ filter_enddate }}"
-        end_date: "{{ filter_enddate }}"
-        date_type: "updated"
-        types:
-        - "enhancement"
-        - "bugfix"
-        - "security"
-    date_filter_name: "ErrataByDate"
     environments:
     - "Development"
     - "Library"
