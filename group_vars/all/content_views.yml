@@ -52,13 +52,18 @@ content_views:
     - name: "rhel"
       product: "Shadowman Registry"
     filters:
-    #- name: "AllPackagesNoErrata"
-    #  type: "rpm"
-    #  inclusion: "true"
-    #  description: "Include all packages with no errata for all repositories"
-    #  original_packages: true
-    #  repositories: "[]"
-    # No Streams in RHEL7
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "AllStreamsNoErrata"
+      type: "module"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
     - name: "ErrataByDate"
       type: "erratum"
       inclusion: "true"
@@ -134,6 +139,18 @@ content_views:
     - name: "Red Hat Virtualization Manager 4.4 for RHEL 8 x86_64 RPMs"
       product: "Red Hat Virtualization Manager"
     filters:
+    - name: "AllPackagesNoErrata"
+      type: "rpm"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
+    - name: "AllStreamsNoErrata"
+      type: "module"
+      inclusion: "true"
+      description: "Include all packages with no errata for all repositories"
+      original_packages: true
+      repositories: "[]"
     - name: "ErrataByDate"
       type: "erratum"
       inclusion: "true"
