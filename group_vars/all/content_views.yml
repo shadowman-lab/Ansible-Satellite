@@ -61,7 +61,7 @@ content_views:
     - name: "AllStreamsNoErrata"
       type: "module"
       inclusion: "true"
-      description: "Include all packages with no errata for all repositories"
+      description: "Include all streams with no errata for all repositories"
       original_packages: true
       repositories: "[]"
     - name: "ErrataByDate"
@@ -148,7 +148,7 @@ content_views:
     - name: "AllStreamsNoErrata"
       type: "module"
       inclusion: "true"
-      description: "Include all packages with no errata for all repositories"
+      description: "Include all streams with no errata for all repositories"
       original_packages: true
       repositories: "[]"
     - name: "ErrataByDate"
