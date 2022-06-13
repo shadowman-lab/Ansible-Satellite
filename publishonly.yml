@@ -1,6 +1,6 @@
 ---
 - name: Publish the configured Content Views and Composite Content Views
   hosts: localhost
-  
+
   roles:
     - contentviewpublisher

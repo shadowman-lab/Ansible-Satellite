@@ -1,6 +1,6 @@
 ---
 - name: Promote the configured Content Views and Composite Content Views
   hosts: localhost
-  
+
   roles:
     - contentviewpromoter

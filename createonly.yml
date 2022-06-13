@@ -1,7 +1,7 @@
 ---
 - name: Create the configured Content Views and Composite Content Views
   hosts: localhost
-  
+
   roles:
     - contentviewcreator
 #    - compositecontentviewcreator
