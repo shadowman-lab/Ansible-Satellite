@@ -1,6 +1,7 @@
 ---
 
 - name: Promote the content views when required
+  when: force_publish == true
   block:
   - name: Promote the configured content views
     redhat.satellite.content_view_version:
@@ -27,4 +28,3 @@
 #      current_lifecycle_environment: "{{ current_lce }}"
 #      lifecycle_environments: "{{ target_lce }}"
 #    loop: "{{ composite_content_views }}"
-  when: force_publish == true

@@ -8,6 +8,7 @@
 # TODO: implement skip if date is the same and force to publish regardless
 
 - name: Update the content views when required
+  when: force_publish == true
   block:
 
   - name: Publish the new content view version
@@ -31,4 +32,3 @@
 #      validate_certs: "{{ sat_validate_certs }}"
 #      description: "{{ description }}"
 #    loop: "{{ composite_content_views }}"
-  when: force_publish == true

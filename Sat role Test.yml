@@ -1,7 +1,7 @@
 ---
 - name: Test sat role
   hosts: localhost
-  gather_facts: False
+  gather_facts: false
 
   tasks:
     - name: role
@@ -10,7 +10,7 @@
         method: GET
         user: "{{ username }}"
         password: "{{ password }}"
-        force_basic_auth: True
-        validate_certs: False
+        force_basic_auth: true
+        validate_certs: false
         body_format: json
       register: role

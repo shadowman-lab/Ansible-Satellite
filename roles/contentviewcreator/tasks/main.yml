@@ -5,7 +5,7 @@
 # TODO: move filter creation to a utility folder and allow filter creation to take place here as well.
 
 - name: "Process the list of content views"
-  include_tasks: create_cv.yml
+  ansible.builtin.include_tasks: create_cv.yml
   loop: "{{ content_views }}"
   loop_control:
     loop_var: cv
