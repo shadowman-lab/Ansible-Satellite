@@ -14,7 +14,4 @@
           - "Chattanooga"
         organizations:
           - "Shadow Man"
-        filters:
-          - permissions:
-              - view_hosts
         state: present
