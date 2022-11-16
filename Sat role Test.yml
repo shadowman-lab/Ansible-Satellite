@@ -10,8 +10,4 @@
         password: "{{ password }}"
         server_url: "{{ server_url }}"
         description: "Only provision on libvirt"
-        locations:
-          - "Chattanooga"
-        organizations:
-          - "Shadow Man"
         state: present
