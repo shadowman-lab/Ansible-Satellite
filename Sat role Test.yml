@@ -8,6 +8,9 @@
       ansible.builtin.uri:
         url: "{{ server_url }}/api/roles?per_page=100"
         method: GET
+        user: "{{ username }}"
+        password: "{{ password }}"
+        force_basic_auth: True
         validate_certs: False
         body_format: json
       register: role
