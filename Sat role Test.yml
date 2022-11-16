@@ -1,0 +1,18 @@
+---
+- name: Test sat role
+  hosts: localhost
+
+  tasks:
+    - name: role
+      redhat.satellite.role:
+        name: "Provisioner"
+        description: "Only provision on libvirt"
+        locations:
+          - "Chattanooga"
+        organizations:
+          - "Shadow Man"
+        filters:
+          - permissions:
+              - view_hosts
+            search: "owner_type = Usergroup and owner_id = 4"
+        state: present
