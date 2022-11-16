@@ -6,6 +6,9 @@
     - name: role
       redhat.satellite.role:
         name: "Provisioner"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        server_url: "{{ server_url }}"
         description: "Only provision on libvirt"
         locations:
           - "Chattanooga"
