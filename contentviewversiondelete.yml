@@ -1,0 +1,6 @@
+---
+- name: Delete Content View Versions
+  hosts: localhost
+
+  roles:
+    - contentviewversion_delete

@@ -1,0 +1,12 @@
+---
+- name: Delete the content view versions
+  redhat.satellite.content_view_version:
+    username: "{{ username }}"
+    password: "{{ password }}"
+    server_url: "{{ server_url }}"
+    content_view: "{{ content_view }}"
+    state: absent
+    organization: "{{ sat_organization }}"
+    validate_certs: false
+    version: "{{ item }}.0"
+  loop: "{{ range(beginningversion, endingversion + 1, 1) | list }}"
