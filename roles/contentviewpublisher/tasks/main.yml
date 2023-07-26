@@ -8,27 +8,27 @@
 # TODO: implement skip if date is the same and force to publish regardless
 
 - name: Update the content views when required
-  when: force_publish == true
+  when: force_publish
   block:
 
-  - name: Publish the new content view version
-    redhat.satellite.content_view_version:
-      username: "{{ username }}"
-      password: "{{ password }}"
-      server_url: "{{ server_url }}"
-      content_view: "{{ item.name }}"
-      organization: "{{ sat_organization }}"
-      validate_certs: "{{ sat_validate_certs }}"
-      description: "{{ description }}"
-    loop: "{{ content_views }}"
+    - name: Publish the new content view version
+      redhat.satellite.content_view_version:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        server_url: "{{ server_url }}"
+        content_view: "{{ item.name }}"
+        organization: "{{ sat_organization }}"
+        validate_certs: "{{ sat_validate_certs }}"
+        description: "{{ description }}"
+      loop: "{{ content_views }}"
 
-#  - name: Publish the new composite content views version
-#    redhat.satellite.content_view_version:
-#      username: "{{ sat_publisher_username }}"
-#      password: "{{ sat_publisher_password }}"
-#      server_url: "{{ sat_server_url }}"
-#      content_view: "{{ item.name }}"
-#      organization: "{{ sat_organization }}"
-#      validate_certs: "{{ sat_validate_certs }}"
-#      description: "{{ description }}"
-#    loop: "{{ composite_content_views }}"
+  #  - name: Publish the new composite content views version
+  #    redhat.satellite.content_view_version:
+  #      username: "{{ sat_publisher_username }}"
+  #      password: "{{ sat_publisher_password }}"
+  #      server_url: "{{ sat_server_url }}"
+  #      content_view: "{{ item.name }}"
+  #      organization: "{{ sat_organization }}"
+  #      validate_certs: "{{ sat_validate_certs }}"
+  #      description: "{{ description }}"
+  #    loop: "{{ composite_content_views }}"
