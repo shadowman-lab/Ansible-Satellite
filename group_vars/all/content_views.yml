@@ -24,6 +24,10 @@ content_views:
         product: "Red Hat Enterprise Linux for x86_64"
       - name: "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8"
         product: "Red Hat Enterprise Linux for x86_64"
+      - name: "Red Hat OpenShift Container Platform 4.13 for RHEL 8 x86_64 RPMs"
+        product: "Red Hat OpenShift Container Platform"
+      - name: "Red Hat Ansible Automation Platform 2.4 for RHEL 8 x86_64 RPMs"
+        product: "Red Hat Ansible Automation Platform"
     environments:
       - "Library"
   - name: "RHEL 9"
@@ -36,6 +40,27 @@ content_views:
         product: "Red Hat Enterprise Linux for x86_64"
     environments:
       - "Library"
+  # - name: "RHV Infrastructure"
+  #   org: "{{ sat_organization }}"
+  #   description: "RHV Infrastructure"
+  #   repositories:
+  #     - name: "Advanced Virtualization for RHEL 8 x86_64 RPMs"
+  #       product: "Red Hat Enterprise Linux Advanced Virtualization"
+  #     - name: "Fast Datapath for RHEL 8 x86_64 RPMs"
+  #       product: "Red Hat Enterprise Linux Fast Datapath"
+  #     - name: "JBoss Enterprise Application Platform 7.4 RHEL 8 RPMs"
+  #       product: "JBoss Enterprise Application Platform"
+  #     - name: "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8"
+  #       product: "Red Hat Enterprise Linux for x86_64"
+  #     - name: "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8"
+  #       product: "Red Hat Enterprise Linux for x86_64"
+  #     - name: "Red Hat Virtualization 4 Management Agents for RHEL 8 x86_64 RPMs"
+  #       product: "Red Hat Virtualization"
+  #     - name: "Red Hat Virtualization Manager 4.4 for RHEL 8 x86_64 RPMs"
+  #       product: "Red Hat Virtualization Manager"
+  #   environments:
+  #     - "Library"
+  #     - "Production"
 
 # composite_content_views:
 #  - name: "RHEL79to84Upgrade"
