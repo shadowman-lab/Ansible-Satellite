@@ -1,4 +1,4 @@
 ---
 sat_organization: "Shadowman"
 sat_location: "Chattanooga"
-sat_validate_certs: true
+sat_validate_certs: false
