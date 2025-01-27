@@ -4,7 +4,7 @@ description: "Published by automation controller on {{ ansible_date_time.date }}
 num_cvs_to_keep: 3
 force_publish: true
 content_views:
-  - name: "RHEL 7"
+  - name: "RHEL7"
     org: "{{ sat_organization }}"
     description: "RHEL 7 CV"
     repositories:
@@ -16,7 +16,7 @@ content_views:
         product: "Red Hat Enterprise Linux Server"
     environments:
       - "Library"
-  - name: "RHEL 8"
+  - name: "RHEL8"
     org: "{{ sat_organization }}"
     description: "RHEL 8 CV"
     repositories:
@@ -30,7 +30,7 @@ content_views:
         product: "Red Hat Ansible Automation Platform"
     environments:
       - "Library"
-  - name: "RHEL 9"
+  - name: "RHEL9"
     org: "{{ sat_organization }}"
     description: "RHEL 9 CV"
     repositories:
