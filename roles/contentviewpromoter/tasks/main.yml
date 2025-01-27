@@ -12,6 +12,7 @@
         validate_certs: "{{ sat_validate_certs }}"
         content_view: "{{ item.name }}"
         description: "{{ description }}"
+        force_promote: true
         current_lifecycle_environment: "{{ current_lce }}"
         lifecycle_environments: "{{ target_lce }}"
       loop: "{{ content_views }}"
