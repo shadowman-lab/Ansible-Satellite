@@ -40,6 +40,15 @@ content_views:
         product: "Red Hat Enterprise Linux for x86_64"
     environments:
       - "Library"
+  - name: "RHEL10"
+    org: "{{ sat_organization }}"
+    description: "RHEL 10 CV"
+    repositories:
+      - name: "Red Hat Enterprise Linux 10 for x86_64 - AppStream RPMs 10"
+        product: "Red Hat Enterprise Linux for x86_64"
+      - name: "Red Hat Enterprise Linux 10 for x86_64 - BaseOS RPMs 10"
+    environments:
+      - "Library"
   # - name: "RHV Infrastructure"
   #   org: "{{ sat_organization }}"
   #   description: "RHV Infrastructure"
